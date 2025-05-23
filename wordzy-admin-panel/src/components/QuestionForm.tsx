@@ -308,6 +308,29 @@ export default function QuestionForm() {
                             </SelectContent>
                         </Select>
                     </div>
+                    <div className="flex flex-col sm:flex-row gap-4 mt-4">
+                        <Button
+                            type="button"
+                            variant="secondary"
+                            onClick={handleGenerateAll}
+                            disabled={loading || !form.wordText}
+                            className="flex-1"
+                        >
+                            Generate All AI Questions
+                        </Button>
+
+                        {generatedQuestions.length > 0 && (
+                            <Button
+                                type="button"
+                                variant="default"
+                                onClick={handleSaveAll}
+                                disabled={loading}
+                                className="flex-1"
+                            >
+                                Save All
+                            </Button>
+                        )}
+                    </div>
                 </CardContent>
 
                 <CardContent>
@@ -370,74 +393,28 @@ export default function QuestionForm() {
                                 />
                             </div>
                         </div>
-
-                        <Accordion type="single" collapsible className="w-full">
-                            <AccordionItem value="additional-details">
-                                <AccordionTrigger>Additional Details</AccordionTrigger>
-                                <AccordionContent>
-                                    <div className="space-y-4 pt-4">
-                                        <div className="form-group">
-                                            <Label htmlFor="explanation" className="form-label">Explanation</Label>
-                                            <Textarea
-                                                id="explanation"
-                                                name="explanation"
-                                                value={form.explanation}
-                                                onChange={handleChange}
-                                                placeholder="Explanation for the answer (optional)"
-                                                className="w-full"
-                                            />
-                                        </div>
-
-                                        <div className="grid sm:grid-cols-2 gap-4">
-                                            <div className="form-group">
-                                                <Label htmlFor="audio" className="form-label">Audio URL</Label>
-                                                <Input
-                                                    id="audio"
-                                                    name="audio"
-                                                    value={form.audio}
-                                                    onChange={handleChange}
-                                                    placeholder="URL to audio file"
-                                                    className="w-full"
-                                                />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <Label htmlFor="image" className="form-label">Image URL</Label>
-                                                <Input
-                                                    id="image"
-                                                    name="image"
-                                                    value={form.image}
-                                                    onChange={handleChange}
-                                                    placeholder="URL to image"
-                                                    className="w-full"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="form-group">
-                                            <Label htmlFor="wordId" className="form-label">Associated Word</Label>
-                                            <Select
-                                                value={form.wordText}
-                                                onValueChange={(value) => handleSelectChange("wordText", value)}
-                                            >
-                                                <SelectTrigger id="wordId" className="w-full">
-                                                    <SelectValue placeholder="Select a word (optional)" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectItem value="">None</SelectItem>
-                                                    {words.map(word => (
-                                                        <SelectItem key={word.id} value={word.id}>
-                                                            {word.word}
-                                                        </SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                            </Select>
-                                        </div>
-                                    </div>
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
-
+                        <div className="grid sm:grid-cols-2 gap-4">
+                            <div className="form-group">
+                                <Label htmlFor="image">Image URL</Label>
+                                <Input
+                                    id="image"
+                                    name="image"
+                                    value={form.image}
+                                    onChange={handleChange}
+                                    placeholder="Enter image URL"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <Label htmlFor="audio">Audio URL</Label>
+                                <Input
+                                    id="audio"
+                                    name="audio"
+                                    value={form.audio}
+                                    onChange={handleChange}
+                                    placeholder="Enter audio URL"
+                                />
+                            </div>
+                        </div>
                         <div className="form-group">
                             <Label htmlFor="lessonId" className="form-label">Lesson</Label>
                             <Select
@@ -476,29 +453,6 @@ export default function QuestionForm() {
                                 <Eye className="mr-2 h-4 w-4" />
                                 Preview Question
                             </Button>
-                        </div>
-                        <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                            <Button
-                                type="button"
-                                variant="secondary"
-                                onClick={handleGenerateAll}
-                                disabled={loading || !form.wordText}
-                                className="flex-1"
-                            >
-                                Generate All AI Questions
-                            </Button>
-
-                            {generatedQuestions.length > 0 && (
-                                <Button
-                                    type="button"
-                                    variant="default"
-                                    onClick={handleSaveAll}
-                                    disabled={loading}
-                                    className="flex-1"
-                                >
-                                    Save All
-                                </Button>
-                            )}
                         </div>
                     </form>
                 </CardContent>
