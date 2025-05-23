@@ -71,7 +71,6 @@ export const fetchSynonymQuestionFromGemini = async (word: string): Promise<Ques
         const jsonText = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
         const cleaned = jsonText.replace(/```json|```/g, '').trim();
         const parsed: QuestionData = JSON.parse(cleaned);
-        console.log('Parsed question:', parsed);
         return parsed;
     } catch {
         return null;
