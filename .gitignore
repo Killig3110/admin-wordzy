@@ -1,0 +1,27 @@
+# ========================
+# Global
+# ========================
+.DS_Store
+Thumbs.db
+*.log
+*.env
+node_modules/
+dist/
+build/
+.vscode/
+
+# ========================
+# api-server
+# ========================
+api-server/node_modules/
+api-server/dist/
+api-server/.env
+
+# ========================
+# wordzy-admin-panel
+# ========================
+wordzy-admin-panel/node_modules/
+wordzy-admin-panel/dist/
+wordzy-admin-panel/.env
+api-server/package-lock.json
+wordzy-admin-panel/package-lock.json
