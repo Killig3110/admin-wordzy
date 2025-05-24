@@ -79,7 +79,14 @@ export const fetchSynonymQuestionFromGemini = async (word: string): Promise<Ques
 
 export const fetchMainIdeaQuestionFromGemini = async (words: string[]): Promise<QuestionData | null> => {
     const joinedWords = words.join(', ');
-    const prompt = `I am creating a reading comprehension question.\nWrite a paragraph using: ${joinedWords}.\nThen provide 4 options for the main idea. One must be correct. Return as JSON:\n{ "paragraph": "...", "options": ["...", "...", "...", "..."], "correctAnswer": "..." }`;
+    const prompt = `I am creating a short reading comprehension question.
+Write a short paragraph (3-5 sentences) using these words: ${joinedWords}.
+Then give 4 short options for the main idea (max 5 words each), with one correct.
+Return as JSON: {
+  "paragraph": "...",
+  "options": ["...", "...", "...", "..."],
+  "correctAnswer": "..."
+}`;
 
     const body = {
         contents: [
@@ -89,11 +96,14 @@ export const fetchMainIdeaQuestionFromGemini = async (words: string[]): Promise<
         ]
     };
 
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiApiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-    });
+    const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiApiKey}`,
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+        }
+    );
 
     const data = await res.json();
     try {

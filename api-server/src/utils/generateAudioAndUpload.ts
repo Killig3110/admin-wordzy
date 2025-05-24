@@ -13,9 +13,8 @@ const imagekit = new ImageKit({
 export async function generateAudioAndUpload(text: string, fileName: string): Promise<string> {
     try {
         const voiceIds = [
-            'pjcYQlDFKMbcOUp6F5GD', // Giọng nữ
-            'iMHt6G42evkXunaDU065', // Giọng nam 1
-            'wAGzRVkxKEs8La0lmdrE', // Giọng nam 2
+            'wAGzRVkxKEs8La0lmdrE', // Giọng nam 1
+            'dXtC3XhB9GtPusIpNtQx', // Giọng nam 2
         ];
 
         const randomVoiceId = voiceIds[Math.floor(Math.random() * voiceIds.length)];

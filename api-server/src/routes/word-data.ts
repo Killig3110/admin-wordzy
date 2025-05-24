@@ -76,11 +76,12 @@ router.get('/api/word-data', async (req: Request, res: Response): Promise<any> =
 
 router.post('/api/generate-all-questions', async (req, res) => {
     try {
-        const { word, wordId, lessonId, definition, audio, exampleSentence, image } = req.body;
+        const { word, wordId, lessonId, definition, exampleSentence, image } = req.body;
 
         const allWords = await fetchAllWordsInLesson(lessonId);
         const defList = allWords.map((w: any) => w.definition);
         const questions: VocabularyQuestion[] = [];
+        const audio = req.body.audio || await generateAudioAndUpload(word, `word-${word}`);
 
         // MULTIPLE_CHOICE
         questions.push({
